@@ -20,12 +20,15 @@ function makeLegendItem(keys, i, colors) {
 
   var x = centerX + 100 + radius;
   var y = centerY + (labelSpace * i) - radius / 3;
-  var boxWidth = labelSpace/4
+  var boxWidth = labelSpace/2
   // var boxWidth = labelSpace / 2;
-  var boxHeight = labelSpace/4;
+  var boxHeight = labelSpace/2;
   // var boxHeight = labelSpace / 2;
 
   fill(colors);
+  stroke(0);
+  strokeWeight(1);
+
   rect(x, y, boxWidth, boxHeight);
 
   fill('black');
@@ -75,8 +78,11 @@ function myDraw() {
   }
 
   for (let i = 0; i < keys.length; i++) {
-    stroke(colors[i]);
     noFill();
+    stroke(colors[i]);
+    strokeWeight(60);
+
+    //noFill();
     let angle = segments[keys[i]] / total * TWO_PI;
 
 
@@ -98,7 +104,7 @@ function myDraw() {
       }
     } */
     if(keys){
-      this.makeLegendItem(keys[i], i, colors);
+      this.makeLegendItem(keys[i], i, colors[i]);
     }
  
 
