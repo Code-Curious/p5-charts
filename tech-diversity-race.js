@@ -13,7 +13,26 @@ segments = {};
 };
  */
 let radius = 80, centerX, centerY;
+let labelSpace = 15;
 
+function makeLegendItem(label, i, colour) {
+  var x = centerX + 50 + radius;
+  var y = centerY + (labelSpace * i) - radius / 3;
+  var boxWidth = 2
+  // var boxWidth = labelSpace / 2;
+  var boxHeight = 2;
+  // var boxHeight = labelSpace / 2;
+
+  fill(colour);
+  rect(x, y, boxWidth, boxHeight);
+
+  fill('black');
+  noStroke();
+  textAlign('left', 'center');
+  textSize(12);
+  text(label, x + boxWidth + 25, y -10);
+  // nofill()
+};
 
 // function mySetup() {
   
@@ -30,7 +49,7 @@ let radius = 80, centerX, centerY;
 // }
 
 function myDraw() {
-  console.log('this.data :', this.data);
+  // console.log('this.data :', this.data);
 
   // console.log('segments :', segments);
 
@@ -46,6 +65,7 @@ function myDraw() {
     createVector(1, 0).angleBetween(
       createVector(mouseX - centerX, mouseY - centerY)
     );
+
   // Counter clockwise angles will be negative 0 to PI, switch them to be from
   // PI to TWO_PI
   if (mouseAngle < 0) {
@@ -58,7 +78,7 @@ function myDraw() {
     arc(centerX, centerY, radius, radius, start, start + angle);
 
     // Check mouse pos
-    if (mouseDist > radius - thickness / 2 &&
+/*     if (mouseDist > radius - thickness / 2 &&
       mouseDist < radius + thickness / 2) {
 
       if (mouseAngle > start && mouseAngle < start + angle) {
@@ -71,8 +91,9 @@ function myDraw() {
         text(`${keys[i]}: ${segments[keys[i]]}`, centerX, centerY);
         pop();
       }
-    }
+    } */
 
+    this.makeLegendItem(keys[i], i, colors[i])
     start += angle;
   }
 }
@@ -143,6 +164,8 @@ function TechDiversityRace() {
   // Create a new pie chart object.
   // this.pie = new PieChart(width / 2, height / 2, width * 0.4);
 
+  
+
 
   this.draw = function() {
     var that = this;
@@ -184,7 +207,7 @@ function TechDiversityRace() {
       segments[labels[index]] = value;
     });
 
-    console.log('segments :', segments);
+    // console.log('segments :', segments);
     myDraw();
     // this.pie.draw(col, labels, colours, title);
 
