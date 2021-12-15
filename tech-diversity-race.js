@@ -1,6 +1,6 @@
 const colors = ['red', 'green', 'blue', 'pink','yellow','purple'];
 const thickness = 40;
-segments = {};
+//segments = {};
 
 // col : [565, 54487, 4548]
 // this.dat.twichya : ['woman', 'male' 'nes ness']
@@ -12,25 +12,27 @@ segments = {};
   baz: 89
 };
  */
-let radius = 80, centerX, centerY;
-let labelSpace = 15;
+let radius = 150, centerX, centerY;
+let labelSpace = 30;
 
-function makeLegendItem(label, i, colour) {
-  var x = centerX + 50 + radius;
+function makeLegendItem(keys, i, colors) {
+
+
+  var x = centerX + 100 + radius;
   var y = centerY + (labelSpace * i) - radius / 3;
-  var boxWidth = 2
+  var boxWidth = labelSpace/4
   // var boxWidth = labelSpace / 2;
-  var boxHeight = 2;
+  var boxHeight = labelSpace/4;
   // var boxHeight = labelSpace / 2;
 
-  fill(colour);
+  fill(colors);
   rect(x, y, boxWidth, boxHeight);
 
   fill('black');
   noStroke();
   textAlign('left', 'center');
   textSize(12);
-  text(label, x + boxWidth + 25, y -10);
+  text(keys, x + boxWidth + 20, y +boxWidth/2);
   // nofill()
 };
 
@@ -74,8 +76,11 @@ function myDraw() {
 
   for (let i = 0; i < keys.length; i++) {
     stroke(colors[i]);
+    noFill();
     let angle = segments[keys[i]] / total * TWO_PI;
-    arc(centerX, centerY, radius, radius, start, start + angle);
+
+
+   arc(centerX, centerY, radius, radius, start + 100, start + angle);
 
     // Check mouse pos
 /*     if (mouseDist > radius - thickness / 2 &&
@@ -92,8 +97,11 @@ function myDraw() {
         pop();
       }
     } */
+    if(keys){
+      this.makeLegendItem(keys[i], i, colors);
+    }
+ 
 
-    this.makeLegendItem(keys[i], i, colors[i])
     start += angle;
   }
 }
@@ -210,6 +218,9 @@ function TechDiversityRace() {
     // console.log('segments :', segments);
     myDraw();
     // this.pie.draw(col, labels, colours, title);
+
+    
+    
 
   };
 }
