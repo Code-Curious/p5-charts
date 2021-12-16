@@ -3,9 +3,23 @@ const thickness = 40;
 let radius = 150, centerX, centerY;
 let labelSpace = 30;
 
+
+// draw an arrow for a vector at a given base position (to debug mouse pointer hovering)
+function drawArrow(base, vec, myColor) {
+  push();
+  stroke(myColor);
+  strokeWeight(3);
+  fill(myColor);
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  let arrowSize = 7;
+  translate(vec.mag() - arrowSize, 0);
+  triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+  pop();
+}
+
 function makeLegendItem(keys, i, colors) {
-
-
   var x = centerX + 80 + radius;
   var y = centerY + (labelSpace * i) - radius /3 -100;
   var boxWidth = labelSpace/2;
@@ -32,10 +46,20 @@ function myDraw() {
   let mouseDist = dist(centerX, centerY, mouseX, mouseY);
   // Find the angle between a vector pointing to the right, and the vector
   // pointing from the center of the window to the current mouse position.
-  let mouseAngle =
-    createVector(1, 0).angleBetween(
-      createVector(mouseX - centerX, mouseY - centerY)
-    );
+  
+  
+  
+  let centerVector = createVector(centerX, centerY);
+  let fromCenterToMousePointerVector = createVector(mouseX - centerX, mouseY - centerY);
+  let mouseAngle = centerVector.angleBetween(fromCenterToMousePointerVector);
+  
+  // FOR DEBUGGING : 
+  let rightAxisVector = createVector(centerX + radius, centerY)
+  let angleInDegs = degrees(mouseAngle).toFixed(2);
+  ellipse(centerVector.x, centerVector.y, 1, 1)
+  text( angleInDegs + "degrees", 200, 50/* , 90, 50  */);
+  drawArrow(centerVector, fromCenterToMousePointerVector, 'gold')
+  drawArrow(centerVector, rightAxisVector, 'cyan')
 
   // Counter clockwise angles will be negative 0 to PI, switch them to be from
   // PI to TWO_PI
