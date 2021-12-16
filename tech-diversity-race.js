@@ -3,82 +3,6 @@ const thickness = 40;
 let radius = 150, centerX, centerY;
 let labelSpace = 30;
 
-function makeLegendItem(keys, i, colors) {
-
-
-  var x = centerX + 80 + radius;
-  var y = centerY + (labelSpace * i) - radius /3 -100;
-  var boxWidth = labelSpace/2;
-  var boxHeight = labelSpace/2;
-
-  fill(colors);
-  stroke(0);
-  strokeWeight(1);
-  rect(x, y, boxWidth, boxHeight);
-
-  fill('black');
-  noStroke();
-  textAlign('left', 'center');
-  textSize(12);
-  text(keys, x + boxWidth + 10, y + boxWidth/2);
-};
-
-function myDraw() {
-  let keys = Object.keys(segments);
-  let total = keys.map(k => segments[k]).reduce((v, s) => v + s, 0);
-  let start = 0;
-
-  // Check the mouse distance and angle
-  let mouseDist = dist(centerX, centerY, mouseX, mouseY);
-  // Find the angle between a vector pointing to the right, and the vector
-  // pointing from the center of the window to the current mouse position.
-  let mouseAngle =
-    createVector(1, 0).angleBetween(
-      createVector(mouseX - centerX, mouseY - centerY)
-    );
-
-  // Counter clockwise angles will be negative 0 to PI, switch them to be from
-  // PI to TWO_PI
-  if (mouseAngle < 0) {
-    mouseAngle += TWO_PI;
-  }
-
-    // Create a new doghnut chart .
-  for (let i = 0; i < keys.length; i++) {
-    noFill();
-    stroke(colors[i]);
-    strokeWeight(80);
-    let angle = segments[keys[i]] / total * TWO_PI;
-    arc(centerX, centerY, radius, radius, start + 100, start + angle);
-
-    // Check mouse pos
-    var d = mouseDist > radius - thickness ; 
-    var ds =  mouseDist < radius + thickness ;
-
-    // console.log(ds)
-
-    if (d  && ds ) {
-      if (mouseAngle > start && mouseAngle < start + angle +100) {
-    // If the mouse is the correct distance from the center to be hovering over
-    // our "donut" and the angsle to the mouse cursor is in the range for the
-    // current slice, display the slice information
-
-      push();
-      noStroke();
-      fill(colors[i]);
-      textSize(20);
-      text(segments[keys[i]]  ,centerX,centerY);
-      //text(`${keys[i]}: ${segments[keys[i]]}`, centerX, centerY);
-      pop();
-      }
-  } 
-  if(keys){
-    this.makeLegendItem(keys[i], i, colors[i]);
-  }
-    start += angle;
-  }
-}
-
 
 
 function TechDiversityRace() {
@@ -120,13 +44,7 @@ function TechDiversityRace() {
     for (let i = 1; i < companies.length; i++) {
       this.select.option(companies[i]);
     }
-    noFill();
-    strokeWeight(thickness);
-    strokeCap(SQUARE);
-    ellipseMode(RADIUS);
-    textAlign(CENTER, CENTER);
-    textSize(20);
-
+    
     centerX = width / 2;
     centerY = height / 2;
   };
@@ -135,7 +53,26 @@ function TechDiversityRace() {
     this.select.remove();
   };
 
+  this.makeLegendItem = function(keys, i, colors) {
+    var x = centerX + 80 + radius;
+    var y = centerY + (labelSpace * i) - radius /3 -100;
+    var boxWidth = labelSpace/2;
+    var boxHeight = labelSpace/2;
+    fill(colors);
+    stroke(0);
+    strokeWeight(1);
+    rect(x, y, boxWidth, boxHeight);
+
+    fill('black');
+    noStroke();
+    textAlign('left', 'center');
+    textSize(12);
+    text(keys, x + boxWidth + 10, y + boxWidth/2);
+  }
+
   this.draw = function() {
+    push(); // save current drawing config
+
     var that = this;
 
     if (!this.loaded) {
@@ -160,6 +97,9 @@ function TechDiversityRace() {
     // Make a title.
     var title = 'Employee diversity at ' + companyName;
 
+    strokeCap(SQUARE);
+    ellipseMode(RADIUS);
+
     strokeWeight(2)
     textAlign('center', 'center');
     textSize(24);
@@ -170,6 +110,59 @@ function TechDiversityRace() {
       segments[labels[index]] = value;
     });
 
-    myDraw();
+    let keys = Object.keys(segments);
+    let total = keys.map(k => segments[k]).reduce((v, s) => v + s, 0);
+    let start = 0;
+
+    // Check the mouse distance and angle
+    let mouseDist = dist(centerX, centerY, mouseX, mouseY);
+    // Find the angle between a vector pointing to the right, and the vector
+    // pointing from the center of the window to the current mouse position.
+    let mouseAngle =
+      createVector(1, 0).angleBetween(
+        createVector(mouseX - centerX, mouseY - centerY)
+      );
+
+    // Counter clockwise angles will be negative 0 to PI, switch them to be from
+    // PI to TWO_PI
+    if (mouseAngle < 0) {
+      mouseAngle += TWO_PI;
+    }
+
+      // Create a new doghnut chart .
+    for (let i = 0; i < keys.length; i++) {
+      noFill();
+      stroke(colors[i]);
+      strokeWeight(80);
+      let angle = segments[keys[i]] / total * TWO_PI;
+      arc(centerX, centerY, radius, radius, start + 100, start + angle);
+
+      // Check mouse pos
+      var d = mouseDist > radius - thickness ; 
+      var ds =  mouseDist < radius + thickness ;
+
+      // console.log(ds)
+
+      if (d  && ds ) {
+        if (mouseAngle > start && mouseAngle < start + angle +100) {
+          // If the mouse is the correct distance from the center to be hovering over
+          // our "donut" and the angsle to the mouse cursor is in the range for the
+          // current slice, display the slice information
+
+          push();
+          noStroke();
+          fill(colors[i]);
+          textSize(20);
+          text(segments[keys[i]]  ,centerX,centerY);
+          //text(`${keys[i]}: ${segments[keys[i]]}`, centerX, centerY);
+          pop();
+        }
+    } 
+      if(keys){
+        this.makeLegendItem(keys[i], i, colors[i]);
+      }
+      start += angle;
+    }
+    pop(); // restore last drawing config
   };
 }
