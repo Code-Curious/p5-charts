@@ -3,19 +3,14 @@ const thickness = 40;
 let radius = 150, centerX, centerY;
 let labelSpace = 30;
 
-
-
 function TechDiversityRace() {
   // Name for the visualisation to appear in the menu bar.
   this.name = 'Tech Diversity: Race';
-
   // Each visualisation must have a unique ID with no special
   // characters.
   this.id = 'tech-diversity-race';
-
   // Property to represent whether data has been loaded.
   this.loaded = false;
-
   // Preload the data. This function is called automatically by the
   // gallery when a visualisation is added.
   this.preload = function() {
@@ -36,8 +31,7 @@ function TechDiversityRace() {
     }
     // Create a select DOM element.
     this.select = createSelect();
-    this.select.position(400, 80); //350 , 40 
-
+    this.select.position(400, 80); 
     // Fill the options with all company names.
     var companies = this.data.columns;
     // First entry is empty.
@@ -71,9 +65,8 @@ function TechDiversityRace() {
   }
 
   this.draw = function() {
-    push(); // save current drawing config
-
-    var that = this;
+    push(); // save current drawing config.
+    var that = this; 
 
     if (!this.loaded) {
       console.log('Data not yet loaded');
@@ -86,15 +79,13 @@ function TechDiversityRace() {
     // Get the value of the company we're interested in from the
     // select item.
     var companyName = this.select.value();
-
     // Get the column of raw data for companyName.
     var col = this.data.getColumn(companyName);
     // Convert all data strings to numbers.
     col = stringsToNumbers(col);
-
     // Copy the row labels from the table (the first item of each row).
     var labels = this.data.getColumn(0);
-    // Make a title.
+    // Make a title for the chart.
     var title = 'Employee diversity at ' + companyName;
 
     strokeCap(SQUARE);
@@ -104,65 +95,57 @@ function TechDiversityRace() {
     textAlign('center', 'center');
     textSize(24);
     text(title, x, y -250);
-    // format data for doughnut input
-    segments = {};
-    col.forEach((value, index) => {
-      segments[labels[index]] = value;
+    
+    segments = {}; //format data for doughnut input
+    // execute each element in the data
+    col.forEach((value, index) => {   
+      segments[labels[index]] = value; 
     });
-
+    // return an array of strings of companies name 
     let keys = Object.keys(segments);
     let total = keys.map(k => segments[k]).reduce((v, s) => v + s, 0);
     let start = 0;
-
     // Check the mouse distance and angle
     let mouseDist = dist(centerX, centerY, mouseX, mouseY);
-    // Find the angle between a vector pointing to the right, and the vector
+    // the angle between a vector pointing to the right, and the vector
     // pointing from the center of the window to the current mouse position.
     let mouseAngle =
       createVector(1, 0).angleBetween(
         createVector(mouseX - centerX, mouseY - centerY)
       );
-
-    // Counter clockwise angles will be negative 0 to PI, switch them to be from
-    // PI to TWO_PI
+    // Counter angles 
     if (mouseAngle < 0) {
       mouseAngle += TWO_PI;
     }
 
-      // Create a new doghnut chart .
+    // Create a new doghnut chart .
     for (let i = 0; i < keys.length; i++) {
-      noFill();
-      stroke(colors[i]);
-      strokeWeight(80);
-      let angle = segments[keys[i]] / total * TWO_PI;
-      arc(centerX, centerY, radius, radius, start + 100, start + angle);
+    noFill();
+    stroke(colors[i]);
+    strokeWeight(80);
+    let angle = segments[keys[i]] / total * TWO_PI;
+    arc(centerX, centerY, radius, radius, start + 100, start + angle);
 
-      // Check mouse pos
-      var d = mouseDist > radius - thickness ; 
-      var ds =  mouseDist < radius + thickness ;
+    // if the mouse is inside doghnut 
+    // display the percentage in the center of doghnut 
+      
+    if (mouseDist > radius - thickness/2  && mouseDist < radius + thickness/2) {
+      if (mouseAngle > start && mouseAngle < start + angle ) {
+        push()
+        noStroke();
+        textSize(30);
+        fill(colors[i]);
+        text(segments[keys[i]] + "%",centerX-20,centerY); 
+        pop()       
+      }
+     }
+     
 
-      // console.log(ds)
-
-      if (d  && ds ) {
-        if (mouseAngle > start && mouseAngle < start + angle +100) {
-          // If the mouse is the correct distance from the center to be hovering over
-          // our "donut" and the angsle to the mouse cursor is in the range for the
-          // current slice, display the slice information
-
-          push();
-          noStroke();
-          fill(colors[i]);
-          textSize(20);
-          text(segments[keys[i]]  ,centerX,centerY);
-          //text(`${keys[i]}: ${segments[keys[i]]}`, centerX, centerY);
-          pop();
-        }
-    } 
-      if(keys){
+     if(keys){
         this.makeLegendItem(keys[i], i, colors[i]);
       }
       start += angle;
     }
-    pop(); // restore last drawing config
+    pop(); // restore last drawing config.
   };
 }
