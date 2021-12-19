@@ -15,7 +15,7 @@ function Worldpopulation() {
   this.preload = function() {
     var self = this;
     this.data = loadTable(
-      './data/tech-diversity/worldPopulationProjections.csv', 'csv', 'header',
+      './data/population/worldPopulationProjections.csv', 'csv', 'header',
       // Callback function to set the value
       // this.loaded to true.
       function(table) {
@@ -25,7 +25,7 @@ function Worldpopulation() {
   };
   this.setup = function()
   {
-    background();
+    background(255);
   }
   this.draw = function(){
 
