@@ -18,8 +18,8 @@ function setup() {
   gallery.addVisual(new PayGapByJob2017());
   gallery.addVisual(new PayGapTimeSeries());
   gallery.addVisual(new ClimateChange());
-  gallery.addVisual(new UKFoodAttitudes());
-  gallery.addVisual(new NutrientsTimeSeries());
+  gallery.addVisual(new Worldpopulation());
+
 }
 
 function draw() {
