@@ -37,6 +37,10 @@ function PieChart(x, y, diameter) {
     var lastAngle = 0;
     var colour;
 
+    // get mouse distance and angle on every frame
+    let mouseDist = dist(this.x, this.y, mouseX, mouseY);
+    let mouseAngle = this.getMouseAngle();
+
     for (var i = 0; i < data.length; i++) {
       if (colours) {
         colour = colours[i];
@@ -54,6 +58,19 @@ function PieChart(x, y, diameter) {
 
       if (labels) {
         this.makeLegendItem(labels[i], i, colour);
+      }
+
+      // handle mouse hover
+      let isCursorDistanceOnChart = mouseDist < this.diameter;
+      let isCursorAngleOnCurrentSlice = mouseAngle >= lastAngle && mouseAngle < lastAngle + angles[i] + 0.001;
+
+      if(isCursorDistanceOnChart && isCursorAngleOnCurrentSlice) {
+        push()
+        noStroke();
+        textSize(30);
+        fill(colour);
+        text(data[i] + " %", this.x, this.y + this.diameter * 0.6); 
+        pop();
       }
 
       lastAngle += angles[i];
@@ -82,4 +99,12 @@ function PieChart(x, y, diameter) {
     textSize(12);
     text(label, x + boxWidth + 10, y + boxWidth / 2);
   };
+  
+  this.getMouseAngle = function() {
+    let angle = 0;
+    angle = Math.PI / 2 - Math.atan((320 - mouseX) / (200 - mouseY));
+    if(mouseY < 200) angle = angle + Math.PI;
+    return angle;
+  }
+
 }
