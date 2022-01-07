@@ -105,7 +105,7 @@ function Worldpopulation() {
         translate(i * 25, 0)
         let c = floor(map(el.worldPopulation,23,99,0,9))
         fill(that.colors[i])
-        rect(0,0,20,-el.worldPopulation*1.5)
+        rect(0,0,20,-el.worldPopulation*20)
         fill(28, 110, 127)
         push()
         translate(0,10)
