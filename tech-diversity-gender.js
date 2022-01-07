@@ -46,6 +46,7 @@ function TechDiversityGender() {
   this.pie = new PieChart(width / 2, height / 2, width * 0.4);
 
   this.draw = function() {
+    push() //to save current drawing config.
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
@@ -64,13 +65,16 @@ function TechDiversityGender() {
     // Copy the column labels from the table (the first item of each row).
     var labels = this.data.getColumn(0);
 
-    // Colour to use for each category.
-    var colours = ['#84db84','green'];
-   
+    // Colour to use for gender.
+    var colours = ['#84db84','#262570'];
+    
     // Make a title.
     var title = 'Gender diversity at ' + company;
 
     // Draw the pie chart!
     this.pie.draw(col,labels, colours, title);
+
+    pop() //to restore last drawing config.
   };
+
 }

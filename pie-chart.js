@@ -18,6 +18,8 @@ function PieChart(x, y, diameter) {
 
   this.draw = function(data, labels, colours, title) {
 
+    push(); 
+
     // Test that data is not empty and that each input array is the
     // same length.
     if (data.length == 0) {
@@ -32,12 +34,13 @@ function PieChart(x, y, diameter) {
     }
 
     // https://p5js.org/examples/form-pie-chart.html
+  
 
     var angles = this.get_radians(data);
     var lastAngle = 0;
     var colour;
 
-    // get mouse distance and angle on every frame
+    // get mouse distance and angle on every frame       ////
     let mouseDist = dist(this.x, this.y, mouseX, mouseY);
     let mouseAngle = this.getMouseAngle();
 
@@ -67,9 +70,9 @@ function PieChart(x, y, diameter) {
       if(isCursorDistanceOnChart && isCursorAngleOnCurrentSlice) {
         push()
         noStroke();
-        textSize(30);
+        textSize(35);
         fill(colour);
-        text(data[i] + " %", this.x, this.y + this.diameter * 0.6); 
+        text(data[i] + " %", this.x - 400, this.y - (this.diameter *0.6) + 200 ); 
         pop();
       }
 
@@ -82,6 +85,7 @@ function PieChart(x, y, diameter) {
       textSize(24);
       text(title, this.x, this.y - this.diameter * 0.6);
     }
+    pop();
   };
 
   this.makeLegendItem = function(label, i, colour) {
@@ -100,6 +104,7 @@ function PieChart(x, y, diameter) {
     text(label, x + boxWidth + 10, y + boxWidth / 2);
   };
   
+  // to handle mouse angle
   this.getMouseAngle = function() {
     let angle = 0;
     angle = Math.PI / 2 - Math.atan((320 - mouseX) / (200 - mouseY));

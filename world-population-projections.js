@@ -8,7 +8,7 @@ function Worldpopulation() {
   this.id = 'population-projections';
 
   // Title to display above the plot.
-  this.title = 'World Population Projections 2021-2031';
+  this.title = 'World Population Projections: 2021-2031';
 
   //let data = []
   // Preload the data. This function is called automatically by the
@@ -49,24 +49,27 @@ function Worldpopulation() {
       color(255, 97, 0)
     ] */
     this.colors = [
-      '#654b75',
+      '#8f7110',
       '#a3544b',
-      '#4a8a53',
-      '#fc03b1',
-      '#6c8394',
+      '#5b5980',
+      '#508f10',
+      '#826599',
       '#949621',
       '#654b75',
-      '#a3544b',
+      '#8f5360',
       '#4a8a53',
-      '#fc03b1',
-      '#6c8394'
+      '#3b4073',
+      '#b88d81'
   ];
 
     noStroke()
   }
   this.draw = function () {
+    push();
     var that = this;
-
+    var title = this.title;
+    var x = width / 2;
+    var y = height / 2;
     
     var dataObj = this.data.getObject();
     
@@ -83,41 +86,40 @@ function Worldpopulation() {
         worldPopulation: (parseFloat(x["World Population"].replaceAll(",", "")) / 1000000000).toFixed(2)
       }
     })
-    
-    console.log('data :', data);
 
-    var title = this.title;
-    var x = width / 2;
-    var y = height / 2;
-
-    background(28, 110, 127)
-    // background(224, 222, 224)
-    textSize(20)
-    fill(255)
+    textSize(24)
+    fill(0)
     textStyle(BOLD)
-    text('Average Noise Level (dB)',185,40)
+    text(title,x- 200,y- 250)
     textSize(12)
     push()
-    translate(55,210)
+    translate(10,200)
     // 
     data.forEach((el,i) => {
         push()
-        translate(i * 25, 0)
+        translate(i * 60, 40) //0
         let c = floor(map(el.worldPopulation,23,99,0,9))
         fill(that.colors[i])
-        rect(0,0,20,-el.worldPopulation*20)
+        rect(x-350,y-50,50,-el.worldPopulation*40)
         fill(28, 110, 127)
         push()
-        translate(0,10)
-        text(el.worldPopulation,3.5,-18)
+        translate(10,20)
+        textSize(15)
+        text(el.year,x-350,y-50)
+        //text(el.worldPopulation + 'billion',x-350,y-50)
         rotate(HALF_PI)
         fill(255)
         textStyle(ITALIC)
-        text(el.year,0,-6)
+        strokeWeight(2)
+        textSize(20)
+        text(el.worldPopulation + ' Billion' ,x-500,y-450) //450
+        //text(el.year,x-450,y-450)
         pop()
         pop()
     })
     pop()
+
+    pop();
     
     /* strokeWeight(2);
     textSize(24);
