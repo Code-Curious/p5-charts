@@ -66,11 +66,12 @@ function TechDiversityGender() {
     var labels = this.data.getColumn(0);
 
     // Colour to use for gender.
-    var colours = ['#84db84','#262570'];
+    var colours = ['#9e6868','#313563'];
     
     // Make a title.
     var title = 'Gender diversity at ' + company;
 
+    textStyle(BOLD)
     // Draw the pie chart!
     this.pie.draw(col,labels, colours, title);
 

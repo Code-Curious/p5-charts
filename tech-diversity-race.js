@@ -1,9 +1,24 @@
-const colors = ['#654b75', '#a3544b', '#4a8a53', '#702540','#6c8394','#949621'];  
+const colors = ['#42547d', '#a3544b', '#6da17b', '#702540','#6c8394','#7d6f7b'];   
 const thickness = 40;
 let radius = 150, centerX, centerY;
 let labelSpace = 30;
 
-// to convert strings to numbers.
+// draw an arrow for a vector at a given base position (to debug mouse pointer hovering)
+function drawArrow(base, vec, myColor) {
+  push();
+  stroke(myColor);
+  strokeWeight(3);
+  fill(myColor);
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  let arrowSize = 7;
+  translate(vec.mag() - arrowSize, 0);
+  triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+  pop();
+}
+
+//to format numbers
 function formatNumber(value) {
   return parseFloat(parseFloat(value).toFixed(2));
 }
@@ -96,9 +111,10 @@ function TechDiversityRace() {
     strokeCap(SQUARE);
     ellipseMode(RADIUS);
 
-    strokeWeight(2);
+    strokeWeight(2)
     textAlign('center', 'center');
     textSize(24);
+    textStyle(BOLD)
     text(title, x, y -250);
     
     segments = {}; //format data for doughnut input
@@ -115,7 +131,7 @@ function TechDiversityRace() {
     let mouseDist = dist(centerX, centerY, mouseX, mouseY);
     let centerVector = createVector(centerX, centerY);
     let fromCenterToMousePointerVector = createVector(mouseX - centerX, mouseY - centerY);
-    let rightAxisVector = createVector(centerX - radius, 289 - centerY); 
+    let rightAxisVector = createVector(centerX - radius, 289 - centerY); // DONT KNOW WHERE THIS 289 COMES FROM HONESTLY  ¯\_(ツ)_/¯
 
     // the currentSliceEndAngle between a vector pointing to the right, and the vector
     // pointing from the center of the window to the current mouse position.
@@ -125,7 +141,16 @@ function TechDiversityRace() {
     if (mouseAngle < 0) {
       mouseAngle += TWO_PI;
     }
-    // Create a new doghnut chart.
+    
+    // FOR DEBUGGING : 
+    /* let angleInDegs = degrees(mouseAngle).toFixed(2);
+    ellipse(centerVector.x, centerVector.y, 1, 1)
+    text( formatNumber(angleInDegs) + " degrees", 200, 50);
+    text( formatNumber(mouseAngle) + " radians", 200, 150);
+    drawArrow(centerVector, fromCenterToMousePointerVector, 'gold');
+    drawArrow(centerVector, rightAxisVector, 'cyan'); */
+
+    // Create a new doghnut chart .
     for (let i = 0; i < keys.length; i++) {
       noFill();
       stroke(colors[i]);
@@ -134,13 +159,22 @@ function TechDiversityRace() {
       if (currentSliceStartAngle < 0 ) {
         currentSliceStartAngle += TWO_PI;
       }
-     //hovering the percentage
+     
       let currentSliceAngleIncrement = segments[keys[i]] / total * TWO_PI;
+      // if (currentSliceAngleIncrement < 0 ) {
+      //   currentSliceAngleIncrement += TWO_PI;
+      // }
       let currentSliceEndAngle = currentSliceStartAngle + currentSliceAngleIncrement;
-      //draw doghnut 
-      arc(centerX, centerY, radius, radius, currentSliceStartAngle, currentSliceEndAngle);  
+      
+      // if (currentSliceEndAngle < 0 ) {
+      //   currentSliceEndAngle += TWO_PI;
+      // }
+      
+      arc(centerX, centerY, radius, radius, currentSliceStartAngle/*  + 100 */, currentSliceEndAngle);
+      
       // if the mouse is inside doghnut 
       // display the percentage in the center of doghnut 
+        
       // "White" race is the first value to draw (purple)
       let isCursorDistanceOnDoughnut =  (mouseDist > radius - thickness) && (mouseDist < radius + thickness);
       let isCursorAngleOnCurrentSlice = (mouseAngle > currentSliceStartAngle) && (mouseAngle < currentSliceEndAngle);
@@ -149,15 +183,15 @@ function TechDiversityRace() {
         noStroke();
         textSize(40);
         fill(colors[i]);
-        
-          text(formatNumber(segments[keys[i]]) + " %", centerX-40, centerY); 
-          pop();
-      }     
-
-    if(keys){
-        this.makeLegendItem(keys[i], i, colors[i]);
+        text(formatNumber(segments[keys[i]]) + "%", centerX-20, centerY); 
+        pop();
       }
-      startAngle += currentSliceAngleIncrement;
+      
+
+      if(keys){
+          this.makeLegendItem(keys[i], i, colors[i]);
+        }
+        startAngle += currentSliceAngleIncrement;
     }
     pop(); // restore last drawing config.
   };
