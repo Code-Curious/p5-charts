@@ -32,15 +32,12 @@ function PieChart(x, y, diameter) {
         Colours (length: ${colours.length})
         Arrays must be the same length!`);
     }
-
-    // https://p5js.org/examples/form-pie-chart.html
   
-
     var angles = this.get_radians(data);
     var lastAngle = 0;
     var colour;
 
-    // get mouse distance and angle on every frame       ////
+    // get mouse distance and angle on every frame 
     let mouseDist = dist(this.x, this.y, mouseX, mouseY);
     let mouseAngle = this.getMouseAngle();
 
@@ -57,7 +54,7 @@ function PieChart(x, y, diameter) {
 
       arc(this.x, this.y,
           this.diameter, this.diameter,
-          lastAngle, lastAngle + angles[i] + 0.001); // Hack for 0!
+          lastAngle, lastAngle + angles[i] + 0.001); 
 
       if (labels) {
         this.makeLegendItem(labels[i], i, colour);
@@ -100,7 +97,7 @@ function PieChart(x, y, diameter) {
     fill('black');
     noStroke();
     textAlign('left', 'center');
-    textSize(12);
+    textSize(20);
     text(label, x + boxWidth + 10, y + boxWidth / 2);
   };
   

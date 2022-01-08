@@ -36,6 +36,7 @@ function PayGapByJob2017() {
   };
 
   this.draw = function() {
+    push(); // save current drawing config.
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
@@ -56,7 +57,6 @@ function PayGapByJob2017() {
     numJobs = stringsToNumbers(numJobs);
 
     // Set ranges for axes.
-    //
     // Use full 100% for x-axis (proportion of women in roles).
     var propFemaleMin = 0;
     var propFemaleMax = 100;
@@ -91,6 +91,7 @@ function PayGapByJob2017() {
             this.dotSizeMin, this.dotSizeMax)
       );
     }
+    pop(); //to restore last drawing config.
   };
 
   this.addAxes = function () {

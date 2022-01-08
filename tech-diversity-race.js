@@ -18,7 +18,8 @@ function drawArrow(base, vec, myColor) {
   pop();
 }
 
-//to format numbers
+//Converting strings to numbers 
+//returns a floating point number with 2 dp 
 function formatNumber(value) {
   return parseFloat(parseFloat(value).toFixed(2));
 }
@@ -86,8 +87,6 @@ function TechDiversityRace() {
 
   this.draw = function() {
     push(); // save current drawing config.
-    var that = this; 
-
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
@@ -141,15 +140,6 @@ function TechDiversityRace() {
     if (mouseAngle < 0) {
       mouseAngle += TWO_PI;
     }
-    
-    // FOR DEBUGGING : 
-    /* let angleInDegs = degrees(mouseAngle).toFixed(2);
-    ellipse(centerVector.x, centerVector.y, 1, 1)
-    text( formatNumber(angleInDegs) + " degrees", 200, 50);
-    text( formatNumber(mouseAngle) + " radians", 200, 150);
-    drawArrow(centerVector, fromCenterToMousePointerVector, 'gold');
-    drawArrow(centerVector, rightAxisVector, 'cyan'); */
-
     // Create a new doghnut chart .
     for (let i = 0; i < keys.length; i++) {
       noFill();
@@ -161,21 +151,11 @@ function TechDiversityRace() {
       }
      
       let currentSliceAngleIncrement = segments[keys[i]] / total * TWO_PI;
-      // if (currentSliceAngleIncrement < 0 ) {
-      //   currentSliceAngleIncrement += TWO_PI;
-      // }
       let currentSliceEndAngle = currentSliceStartAngle + currentSliceAngleIncrement;
-      
-      // if (currentSliceEndAngle < 0 ) {
-      //   currentSliceEndAngle += TWO_PI;
-      // }
-      
-      arc(centerX, centerY, radius, radius, currentSliceStartAngle/*  + 100 */, currentSliceEndAngle);
-      
+      arc(centerX, centerY, radius, radius, currentSliceStartAngle, currentSliceEndAngle);      
       // if the mouse is inside doghnut 
-      // display the percentage in the center of doghnut 
-        
-      // "White" race is the first value to draw (purple)
+      // display the percentage in the center of doghnut        
+      // "White" race is the first value to draw 
       let isCursorDistanceOnDoughnut =  (mouseDist > radius - thickness) && (mouseDist < radius + thickness);
       let isCursorAngleOnCurrentSlice = (mouseAngle > currentSliceStartAngle) && (mouseAngle < currentSliceEndAngle);
       if (isCursorDistanceOnDoughnut && isCursorAngleOnCurrentSlice) {
@@ -183,11 +163,11 @@ function TechDiversityRace() {
         noStroke();
         textSize(40);
         fill(colors[i]);
-        text(formatNumber(segments[keys[i]]) + "%", centerX-20, centerY); 
+        text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
         pop();
-      }
-      
+      }     
 
+    //to draw legend Item
       if(keys){
           this.makeLegendItem(keys[i], i, colors[i]);
         }

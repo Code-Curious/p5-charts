@@ -80,6 +80,9 @@ function PayGapTimeSeries() {
   };
 
   this.draw = function() {
+    
+    push(); // save current drawing config.
+
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
@@ -144,6 +147,8 @@ function PayGapTimeSeries() {
       // position of the next line segment.
       previous = current;
     }
+    
+    pop(); //to restore last drawing config. 
   };
 
   this.drawTitle = function() {
