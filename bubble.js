@@ -1,10 +1,6 @@
-function BubbleChart(x,y,size,xSpeed,ySpeed,direction,_name)
+function Bubble(_name)
 {
-    this.x = x;
-    this.y = y;
-    this.size = size;
-    this.xSpeed = xSpeed;
-    this.ySpeed = ySpeed;
+    this.size = 20;
     this.target_size = 20;
     this.pos = createVector(0,0);
     this.direction = createVector(0,0);
@@ -68,6 +64,8 @@ function BubbleChart(x,y,size,xSpeed,ySpeed,direction,_name)
     
     this.setData = function(i)
     {
-        this.target_size = map(this.data[i], 0, maxAmt, 20, 250);
-    }    
+        this.target_size = map(this.data[i], 0, this.maxAmt, 20, 250);
+    }
+    
+    
 }

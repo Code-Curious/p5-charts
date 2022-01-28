@@ -1,5 +1,11 @@
 function internetspeedsbycountry() {
 
+  this.bubbles = [];
+  this.years = [];
+  this.maxAmt;
+  this.yearButtons = [];
+
+
   // Name for the visualisation to appear in the menu bar.
   this.name = 'Internet speeds by country';
 
@@ -15,7 +21,7 @@ function internetspeedsbycountry() {
   this.preload = function() {
     var self = this;
     this.data = loadTable(
-      './data/internet/internetspeedsbycountry.csv', 'csv', 'header',
+      './data/internet/foodData.csv', 'csv', 'header',
       // Callback function to set the value
       // this.loaded to true.
       function(table) {
@@ -30,6 +36,62 @@ function internetspeedsbycountry() {
       console.log('Data not yet loaded');
       return;
     }
+
+    var rows = this.data.getRows();
+    var numColumns = this.data.getColumnCount();
+
+    for(var i = 5; i < numColumns; i++)
+    {
+        var that = this;
+        var y = this.data.columns[i];
+        this.years.push(y);
+        b = createButton(y,y);
+        b.parent('years')
+        b.elt.addEventListener("click", function(ev){
+          console.log('ev.target.value :', ev.target.value);
+          that.changeYear(ev.target.value);
+          // that.changeYear(this.elt.value);
+        })
+        this.yearButtons.push(b);
+    }
+
+    this.maxAmt = 0;
+
+    for(var i = 0; i < rows.length; i++)
+    {
+        if(rows[i].get(0) != "")
+        {
+            var b = new Bubble(rows[i].get(0));
+
+            for(var j = 5; j < numColumns; j++)
+            {
+                if(rows[i].get(j) != "")
+                {
+                    var n = rows[i].getNum(j);
+                    if(n > this.maxAmt)
+                    {
+                        this.maxAmt = n; //keep a tally of the highest value
+                    }
+                    b.data.push(n);
+                }
+                else
+                {
+                     b.data.push(0);
+                }
+
+            }
+
+            this.bubbles.push(b);
+        }
+
+    }
+
+    for(var i = 0; i < this.bubbles.length; i++)
+    {
+        this.bubbles[i].setData(0);
+    }
+
+
     
   };
 
@@ -49,38 +111,32 @@ function internetspeedsbycountry() {
   // };
 
   // Create a new pie chart object.
-  this.bubble = new BubbleChart(width / 2, height / 2, 20);
-  this.bubble = new BubbleChart()
+  // this.bubble = new Bubble(width / 2, height / 2, 20);
 
+  this.changeYear = function(year)
+  {
+      var y = this.years.indexOf(year);
+      
+      for(var i = 0; i < this.bubbles.length; i++)
+      {
+          this.bubbles[i].setData(y);
+      }
+  }
+  
   this.draw = function() {
     push() //to save current drawing config.
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
     }
-
-    // // Get the value of the company we're interested in from the
-    // // select item.
-    // var company = this.select.value();
-
-    // // Get the column of raw data for questionType.
-    // var col = this.data.getRows(company);
-
-    // // Convert all data strings to numbers.
-    // col = stringsToNumbers(col);
-
-    // // Copy the column labels from the table (the first item of each row).
-    // var labels = this.data.getColumn(0);
-
-    // // Colour to use for gender.
-    // var colours = ['#9e6868','#313563'];
     
-    // Make a title.
-    var title = 'Gender diversity at ' ;
-
-    textStyle(BOLD)
-    // Draw the pie chart!
-    this.bubble.draw(title);
+    // Draw the bubble
+    translate(width/2, height/2);
+    for(var i = 0; i < this.bubbles.length; i++)
+    {
+        this.bubbles[i].update(this.bubbles);
+        this.bubbles[i].draw();
+    }
 
     pop() //to restore last drawing config.
   };
