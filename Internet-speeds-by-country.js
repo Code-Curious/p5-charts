@@ -111,6 +111,7 @@ function internetspeedsbycountry() {
   // };
 
   // Create a new pie chart object.
+
   // this.bubble = new Bubble(width / 2, height / 2, 20);
 
   this.changeYear = function(year)
@@ -123,6 +124,11 @@ function internetspeedsbycountry() {
       }
   }
   
+
+  this.bubble = new BubbleChart(width / 2, height / 2, 20);
+  // this.bubble = new BubbleChart()
+
+
   this.draw = function() {
     push() //to save current drawing config.
     if (!this.loaded) {

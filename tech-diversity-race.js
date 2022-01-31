@@ -165,7 +165,8 @@ function TechDiversityRace() {
         fill(colors[i]);
         text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
         pop();
-      }     
+      } 
+          
 
     //to draw legend Item
       if(keys){
