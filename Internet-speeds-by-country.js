@@ -21,13 +21,21 @@ function internetspeedsbycountry() {
   this.preload = function() {
     var self = this;
     this.data = loadTable(
-      './data/internet/foodData.csv', 'csv', 'header',
+      './data/internet/socialmediadata.csv', 'csv', 'header',
       // Callback function to set the value
       // this.loaded to true.
       function(table) {
+        table.rows = table.rows.map(function(row) {
+          row.arr[1] = parseFloat(row.arr[1]);
+          row.obj["Number of users"] = parseFloat(row.obj["Number of users"]);
+          return row;
+        })
+
+        console.log('table :', table);
         self.loaded = true;
-      });
-      console.log(this.data)
+    });
+
+    console.log(this.data)
 
   };
 
@@ -125,8 +133,8 @@ function internetspeedsbycountry() {
   }
   
 
-  this.bubble = new BubbleChart(width / 2, height / 2, 20);
-  // this.bubble = new BubbleChart()
+  this.bubble = new Bubble(width / 2, height / 2, 20);
+  // this.bubble = new Bubble()
 
 
   this.draw = function() {
