@@ -67,7 +67,9 @@ function socialmedia() {
   {
       if(rows[i].get(0) != "")
       {
-          var b = new Bubble(rows[i].get(0));
+          let numberOfUsers = rows[i].obj["Number of users"]
+          let size = 60 * numberOfUsers
+          let b = new Bubble(rows[i].get(0), size);
           this.bubbles.push(b);
       }
 

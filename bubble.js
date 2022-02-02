@@ -1,6 +1,6 @@
 function Bubble(_name, size)
 {
-    this.size = 80;
+    this.size = size;
     this.target_size = 20;
     this.pos = createVector(0,0);
     // this.x = width/2;
@@ -33,7 +33,9 @@ function Bubble(_name, size)
         text(this.name,this.pos.x ,this.pos.y);
         // this.pos.y = this.pos.y + ySpeed;
         // this.pos.x = this.pos.x + ySpeed;
-        this.pos.x++
+
+        // moving it around
+       /*  this.pos.x++
         this.pos.y++
 
         //bounce off left and right
@@ -44,7 +46,7 @@ function Bubble(_name, size)
         // bounce off top and bottom
         if(this.pos.y < this.pos || this.pos.y > height) {
             ySpeed = ySpeed * -1;
-        }
+        } */
                 
 
        
@@ -73,7 +75,8 @@ function Bubble(_name, size)
                 var v = p5.Vector.sub(this.pos,_bubbles[i].pos); 
                 var d = v.mag();
 
-                if(d < this.size/2 + _bubbles[i].size/2)
+                if(d < (this.maxY/2 -20) + _bubbles[i].size/2)
+                // if(d < (this.size/2 -20) + _bubbles[i].size/2)
                 {
                     if(d > 0)
                     {

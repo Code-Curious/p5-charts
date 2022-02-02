@@ -93,7 +93,7 @@ function Worldpopulation() {
         textStyle(ITALIC)
         strokeWeight(2)
         textSize(20)
-        text(el.worldPopulation + ' Billion' ,x-500,y-450)
+        text(el.worldPopulation + ' Billion' ,x-500,y-525)
 
         pop()
         pop()
