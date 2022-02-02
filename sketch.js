@@ -18,7 +18,7 @@ function setup() {
   gallery.addVisual(new PayGapTimeSeries());
   gallery.addVisual(new PayGapByJob2017());
   gallery.addVisual(new Worldpopulation());
-  gallery.addVisual(new internetspeedsbycountry());
+  gallery.addVisual(new socialmedia());
 
 }
 
