@@ -64,29 +64,34 @@ function Socialmedia() {
   };
 
   this.draw = function() {
-  push() //to save current drawing config.
-  if (!this.loaded) {
-    console.log('Data not yet loaded');
-    return;
-  }
+    push() //to save current drawing config.
+    if (!this.loaded) {
+      console.log('Data not yet loaded');
+      return;
+    }
 
-  // Draw the bubbles.
-  translate(width/2, height/2);
-  for(var i = 0; i < this.bubbles.length; i++)
-  {
-      this.bubbles[i].update(this.bubbles);
-      this.bubbles[i].draw();
-      if (i === 16) { break; } // ends the loop when the loop counter i=16. 
+    // Draw the bubbles.
+    translate(width/2, height/2);
+    for(var i = 0; i < this.bubbles.length; i++)
+    {
+        this.bubbles[i].update(this.bubbles);
+        this.bubbles[i].draw();
+        if (i === this.bubbles.length -1 ) { break; } // ends the loop when the loop counter i=16. 
+    }
+    
+    //draw the title.
+    strokeWeight(2);
+    textAlign('center', 'center');
+    textSize(24);
+    textStyle(BOLD);
+    text(title,x - 550,y - 680); //650
+    
+    pop() //to restore last drawing config.
+  };
+
+  this.destroy = function(){
+    this.bubbles = [];
   }
   
-  //draw the title.
-  strokeWeight(2);
-  textAlign('center', 'center');
-  textSize(24);
-  textStyle(BOLD);
-  text(title,x - 550,y - 680); //650
-  
-  pop() //to restore last drawing config.
-  };
  
 }
