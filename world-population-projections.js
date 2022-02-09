@@ -52,10 +52,10 @@ function Worldpopulation() {
     var x = width / 2;
     var y = height / 2;
     
-    textSize(24)
-    fill(0)
-    textStyle(BOLD)
-    text(title,x- 200,y- 250)
+    textSize(24);
+    fill(0);
+    textStyle(BOLD);
+    text(title,x- 200,y- 250); 
     var dataObj = this.data.getObject();
 
     // transform data object into an array
@@ -73,33 +73,36 @@ function Worldpopulation() {
     })
 
    
-    textSize(12)
-    push()
-    translate(10,200)
-    // 
+    textSize(12);
+    push();
+    translate(10,200);
+    
+    //to execute each element in the data.
+    //to draw the bar chart.
     data.forEach((el,i) => {
-        push()
-        translate(i * 60, 40) //0
-        let c = floor(map(el.worldPopulation,23,99,0,9))
-        fill(that.colors[i])
-        rect(x-350,y-50,50,-el.worldPopulation*40)
-        fill(28, 110, 127)
-        push()
-        translate(10,20)
-        textSize(15)
-        text(el.year,x-350,y-50)
-        rotate(HALF_PI)
-        fill(255)
-        textStyle(ITALIC)
-        strokeWeight(2)
-        textSize(20)
-        text(el.worldPopulation + ' Billion' ,x-500,y-525)
+        push();
+        translate(i * 60, 40);
+        let c = floor(map(el.worldPopulation,23,99,0,9));
+        fill(that.colors[i]);
+        rect(x-350,y-50,50,-el.worldPopulation*40);
+        fill(28, 110, 127);
+        push();
+        translate(10,20);
+        textSize(15);
+        text(el.year,x-350,y-50);
+        rotate(HALF_PI);
+        fill(255);
+        textStyle(ITALIC);
+        strokeWeight(2);
+        textSize(20);
+        text(el.worldPopulation + ' Billion' ,x-500,y-525); //population to appear in each rect.
 
-        pop()
-        pop()
+        pop();
+        pop();
     })
-    pop()
     pop();
+
+    pop(); //to restore last drawing config.
   }
 
 }

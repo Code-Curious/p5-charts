@@ -18,7 +18,8 @@ function setup() {
   gallery.addVisual(new PayGapTimeSeries());
   gallery.addVisual(new PayGapByJob2017());
   gallery.addVisual(new Worldpopulation());
-  gallery.addVisual(new socialmedia());
+  gallery.addVisual(new Socialmedia());
+  //gallery.addVisual(new InrnetUsers())
 
 }
 
