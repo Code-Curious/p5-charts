@@ -19,7 +19,7 @@ function setup() {
   gallery.addVisual(new PayGapByJob2017());
   gallery.addVisual(new Worldpopulation());
   gallery.addVisual(new Socialmedia());
-  //gallery.addVisual(new InrnetUsers())
+  //gallery.addVisual(new InrnetUsers());
 
 }
 

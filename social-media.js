@@ -84,11 +84,12 @@ function Socialmedia() {
     textAlign('center', 'center');
     textSize(24);
     textStyle(BOLD);
-    text(title,x - 550,y - 680); //650
+    text(title,x - 550,y - 650); //650
     
     pop() //to restore last drawing config.
   };
 
+  // to clear the canvas 
   this.destroy = function(){
     this.bubbles = [];
   }

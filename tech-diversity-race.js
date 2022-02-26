@@ -163,6 +163,7 @@ function TechDiversityRace() {
         noStroke();
         textSize(40);
         fill(colors[i]);
+        
         text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
         pop();
       } 

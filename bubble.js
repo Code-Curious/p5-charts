@@ -11,10 +11,10 @@ function Bubble(_name, size)
     this.color = randomColor({ luminosity: 'light' });
     // this.data = [];
 
-    let ySpeed = random(-0.5,0,5);
-    let xSpeed = -0.5;
+    // let ySpeed = random(-0.5,0,5);
+    // let xSpeed = -0.5;
 
-    var rad = 60; 
+    // var rad = 60; 
 
     this.draw = function()
     {
@@ -85,7 +85,7 @@ this.update = function(_bubbles)
                 }
                 else
                 {
-                    this.direction.add(p5.Vector.random2D());    
+                    this.direction.add(p5.Vector.random2D()); //Make a new 2D unit vector from a random angle 
                         
                 }
             }
