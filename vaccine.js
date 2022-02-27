@@ -17,7 +17,7 @@ function Vaccine(){
   this.preload = function() {
     var self = this;
     this.data = loadTable(
-      './data/vaccine/vaccinesuk.csv', 'csv', 'header',
+      './data/vaccine/vaccines.csv', 'csv', 'header',
       // Callback function to set the value
       // this.loaded to true.
       function(table) {
