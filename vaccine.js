@@ -26,42 +26,33 @@ function Vaccine(){
   };
 
   this.setup = function() {
+    frameRate(5)
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
     }
 
     this.waffles = [];
-/*     this.select = createSelect();
-    this.select.position(400, 80); 
-    var companies = this.data.columns;
-    for (let i = 1; i < companies.length; i++) {
-      this.select.option(companies[i]);
-    } */
-    let row = this.data.getRow(0);
-    let firstDosePercentage = parseInt(row.get(1).trim().substring(0, row.get(1).trim().length - 1));
-    let remainingPercentageFromFirstDose = 100 - firstDosePercentage;
-    let secondDosePercentage = parseInt(row.get(2).trim().substring(0, row.get(2).trim().length - 1));
-    let remainingPercentageFromSecondDose = 100 - secondDosePercentage;
-
-    var waffleNames = ["First dose", "Second dose" ];
-
-    var valuesNames = ['Remaining Population', 'Vaccinated'];
     
-    let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage]]; 
+    this.select = createSelect();
+    this.select.position(400, 80); 
+    console.log('this.data :', this.data);
 
-    for (var i = 0; i < wafflesData.length; i++) {
-      let x = 200 + (i * 220);
-      this.waffles.push(new Waffle(x, 200, 200, 200, 10, 10, wafflesData[i], waffleNames[i], valuesNames));
-
-
-      
+    var countries = this.data.getRows().map( x => x.get(0));
+    console.log('countries :', countries);
+    for (let i = 0; i < countries.length; i++) {
+      this.select.option(countries[i]);
     }
+    
+    this.select.changed(x => {
+      let selectedCountry = this.select.value();
+      this.relevantRow = this.data.getRows().find(element => element.get(0).trim().toLowerCase() == selectedCountry.trim().toLowerCase());
 
+    })
   };
 
   this.destroy = function() {
-    // this.select.remove();
+    this.select.remove();
   };
 
   this.draw = function() {
@@ -71,11 +62,40 @@ function Vaccine(){
       return;
     }
 
+    //draw the title of the chart
+    /* fill(0)
+    textSize(40)
+    text(this.title, 200, 200); */
 
-    for(var i =0; i < this.waffles.length;i++){
+    if (!this.relevantRow) {
+      console.log('this.relevantRow :', this.relevantRow);
+      return;
+    }
+    // console.profile('data-prep')
+    // let row = this.csvRows.find(element => element.get(0).trim().toLowerCase() == selectedCountry.trim().toLowerCase());
+    let firstDosePercentage = parseInt(this.relevantRow.get(1).trim().substring(0, this.relevantRow.get(1).trim().length - 1));
+    let remainingPercentageFromFirstDose = 100 - firstDosePercentage;
+    let secondDosePercentage = parseInt(this.relevantRow.get(2).trim().substring(0, this.relevantRow.get(2).trim().length - 1));
+    let remainingPercentageFromSecondDose = 100 - secondDosePercentage;
+
+    var waffleNames = ["First dose", "Second dose" ];
+
+    var valuesNames = ['Remaining Population', 'Vaccinated'];
+    
+    let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage]]; 
+    
+    // console.profileEnd('data-prep')
+    for (var i = 0; i < wafflesData.length; i++) {
+      let x = 200 + (i * 220);
+      this.waffles.push(new Waffle(x, 200, 200, 200, 10, 10, wafflesData[i], waffleNames[i], valuesNames));
+    }
+
+
+
+    for(var i = 0; i < this.waffles.length;i++){
       this.waffles[i].draw();
     }
-    for(var i=0; i < this.waffles.length;i++ ){
+    for(var i= 0; i < this.waffles.length;i++ ){
       this.waffles[i].checkMouse(mouseX,mouseY);
   
     }
