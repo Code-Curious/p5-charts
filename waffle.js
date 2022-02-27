@@ -1,13 +1,13 @@
-function Waffle(x, y, width, height, boxes_across, boxes_down, table, columnHeading, possibleValues) {
-
+function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possibleValues) {
     var x = x;
     var y = y;
     var height = height;
     var width = width;
     var boxes_across = boxes_across;
     var boxes_down = boxes_down;
+    var name = name;
 
-    var coloumn = table.getColumn(columnHeading);
+    // var coloumn = table.getColumn(columnHeading);
     var possibleValues = possibleValues;
 
     var colours = ['#f0f0f0', '#d6caeb'];
@@ -16,37 +16,14 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, table, columnHead
     var boxes = [];
 
 
-    function categoryLocation(categoryName) {
-        for (var i = 0; i < possibleValues.length; i++) {
-            if (categoryName == categories[i].name) {
-                return i;
-
-            }
-        }
-        return -1; // returns -1 for the end of the for loop
-    }
     function addCategories() {
         for (var i = 0; i < possibleValues.length; i++) {
             categories.push({
-                'name': possibleValues[i],
-                'count': 0,
-                'colour': colours[i % colours.length]
+                name: possibleValues[i],
+                boxesCount: round(boxes_across * boxes_down * (data[i]/100)),// number of boxes to color
+                colour: colours[i % colours.length]
             })
-        }
-        //iterate over the coloumn
-        for (var i = 0; i < coloumn.length; i++) {
-
-            var catLocation = categoryLocation(coloumn[i])
-            if (catLocation != -1) {
-                categories[catLocation].count++
-            }
-
-        }
-        //iterate over the categories and add proportions
-        for (var i = 0; i < categories.length; i++) {
-
-            categories[i].boxes = round((categories[i].count /
-                coloumn.length) * (boxes_down * boxes_across));
+            console.log('categories after add :', categories);
         }
     }
 
@@ -62,7 +39,7 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, table, columnHead
         for (var i = 0; i < boxes_down; i++) {
             boxes.push([]) // we want the boxes to be 2D
             for (var j = 0; j < boxes_across; j++) {
-                if (currentCategoryBox == categories[currentCategory].boxes) {
+                if (currentCategoryBox == categories[currentCategory].boxesCount) {
                     currentCategoryBox = 0;
                     currentCategory++;
                 }
@@ -78,27 +55,25 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, table, columnHead
 
     }
 
-
-    //add categories 
-    addCategories();
-    addBoxes();
-    // draw waffle chart
     this.draw = function () {
         // iterate over boxes 
+        push();
         for (var i = 0; i < boxes.length; i++) {
             for (var j = 0; j < boxes[i].length; j++) { //iterate each element in the array
                 if (boxes[i][j].category != undefined) {
                     boxes[i][j].draw();
-
                 }
             }
         }
 
+        strokeWeight(1);
+        fill("#718096");
+        textSize(20);
+        text(name, x + 50, y - 20);
+        pop();
 
     }
     this.checkMouse = function (mouseX, mouseY) {
-        // 
-
         for (var i = 0; i < boxes.length; i++) {
             for (var j = 0; j < boxes[i].length; j++) {
                 if (boxes[i][j].category != undefined) {
@@ -121,6 +96,12 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, table, columnHead
             }
         }
     }
+
+    //add categories 
+    addCategories();
+    addBoxes();
+    // draw waffle chart
+    
 }
 
 function Box(x, y, width, height, category) {
@@ -148,6 +129,7 @@ function Box(x, y, width, height, category) {
 
     this.draw = function () {
 
+        stroke(255)
         fill(category.colour);
         rect(x, y, width, height);
     }

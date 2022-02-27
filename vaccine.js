@@ -47,29 +47,21 @@ function Vaccine(){
     var waffleNames = ["First dose", "Second dose" ];
 
     var valuesNames = ['Remaining Population', 'Vaccinated'];
-
-	//waffle = new Waffle(30,30,300,300,8,8,data,"Monday",values)
-
-	//draw all the this.waffles
-    for (var i = 0; i < waffleNames.length; i++) {
-      if (i < 4) {
-        this.waffles.push(new Waffle(20 +
-          (i * 220), 20, 200, 200, 8, 8, this.data, waffleNames[i], valuesNames));
-      }
-      else {
-        this.waffles.push(new Waffle(120 +
-          (i - 4) * 220, 240, 200, 200, 8, 8, this.data, waffleNames[i], valuesNames));
-
-      }
-
-    }
     
-    // centerX = width / 2;
-    // centerY = height / 2;
+    let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage]]; 
+
+    for (var i = 0; i < wafflesData.length; i++) {
+      let x = 200 + (i * 220);
+      this.waffles.push(new Waffle(x, 200, 200, 200, 10, 10, wafflesData[i], waffleNames[i], valuesNames));
+
+
+      
+    }
+
   };
 
   this.destroy = function() {
-    this.select.remove();
+    // this.select.remove();
   };
 
   this.draw = function() {
@@ -87,6 +79,6 @@ function Vaccine(){
       this.waffles[i].checkMouse(mouseX,mouseY);
   
     }
-    
+    pop()
   };
 }
