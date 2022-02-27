@@ -26,6 +26,7 @@ function setup() {
 
 function draw() {
   background(255);
+  frameRate(60);
   if (gallery.selectedVisual != null) {
     gallery.selectedVisual.draw();
   }

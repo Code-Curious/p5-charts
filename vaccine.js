@@ -26,7 +26,6 @@ function Vaccine(){
   };
 
   this.setup = function() {
-    frameRate(5)
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
@@ -48,6 +47,24 @@ function Vaccine(){
       let selectedCountry = this.select.value();
       this.relevantRow = this.data.getRows().find(element => element.get(0).trim().toLowerCase() == selectedCountry.trim().toLowerCase());
 
+      // console.profile('data-prep')
+      // let row = this.csvRows.find(element => element.get(0).trim().toLowerCase() == selectedCountry.trim().toLowerCase());
+      let firstDosePercentage = parseInt(this.relevantRow.get(1).trim().substring(0, this.relevantRow.get(1).trim().length - 1));
+      let remainingPercentageFromFirstDose = 100 - firstDosePercentage;
+      let secondDosePercentage = parseInt(this.relevantRow.get(2).trim().substring(0, this.relevantRow.get(2).trim().length - 1));
+      let remainingPercentageFromSecondDose = 100 - secondDosePercentage;
+
+      var waffleNames = ["First dose", "Second dose" ];
+
+      var valuesNames = ['Remaining Population', 'Vaccinated'];
+
+      let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage]]; 
+
+      // console.profileEnd('data-prep')
+      for (var i = 0; i < wafflesData.length; i++) {
+        let x = 200 + (i * 220);
+        this.waffles.push(new Waffle(x, 200, 200, 200, 10, 10, wafflesData[i], waffleNames[i], valuesNames));
+      }
     })
   };
 
@@ -57,6 +74,7 @@ function Vaccine(){
 
   this.draw = function() {
     push(); // save current drawing config.
+    frameRate(24);
     if (!this.loaded) {
       console.log('Data not yet loaded');
       return;
@@ -71,27 +89,7 @@ function Vaccine(){
       console.log('this.relevantRow :', this.relevantRow);
       return;
     }
-    // console.profile('data-prep')
-    // let row = this.csvRows.find(element => element.get(0).trim().toLowerCase() == selectedCountry.trim().toLowerCase());
-    let firstDosePercentage = parseInt(this.relevantRow.get(1).trim().substring(0, this.relevantRow.get(1).trim().length - 1));
-    let remainingPercentageFromFirstDose = 100 - firstDosePercentage;
-    let secondDosePercentage = parseInt(this.relevantRow.get(2).trim().substring(0, this.relevantRow.get(2).trim().length - 1));
-    let remainingPercentageFromSecondDose = 100 - secondDosePercentage;
-
-    var waffleNames = ["First dose", "Second dose" ];
-
-    var valuesNames = ['Remaining Population', 'Vaccinated'];
     
-    let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage]]; 
-    
-    // console.profileEnd('data-prep')
-    for (var i = 0; i < wafflesData.length; i++) {
-      let x = 200 + (i * 220);
-      this.waffles.push(new Waffle(x, 200, 200, 200, 10, 10, wafflesData[i], waffleNames[i], valuesNames));
-    }
-
-
-
     for(var i = 0; i < this.waffles.length;i++){
       this.waffles[i].draw();
     }
@@ -99,6 +97,6 @@ function Vaccine(){
       this.waffles[i].checkMouse(mouseX,mouseY);
   
     }
-    pop()
+    pop();
   };
 }
