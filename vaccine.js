@@ -48,7 +48,6 @@ function Vaccine(){
       this.selectedCountry = this.select.value();
       this.relevantRow = this.data.getRows().find(element => element.get(0).trim().toLowerCase() == this.selectedCountry.trim().toLowerCase());
 
-      // console.profile('data-prep')
       // let row = this.csvRows.find(element => element.get(0).trim().toLowerCase() == this.selectedCountry.trim().toLowerCase());
       let firstDosePercentage = parseInt(this.relevantRow.get(1).trim().substring(0, this.relevantRow.get(1).trim().length - 1));
       let remainingPercentageFromFirstDose = 100 - firstDosePercentage;
@@ -90,6 +89,7 @@ function Vaccine(){
 
     var x = width /2; 
     var y = height/2;
+
     //draw the title of the chart
     var title = this.title + this.selectedCountry;
     strokeWeight(2)
@@ -103,13 +103,16 @@ function Vaccine(){
       return;
     }
     
+    //draw the waffles 
     for(var i = 0; i < this.waffles.length;i++){
       this.waffles[i].draw();
     }
     for(var i= 0; i < this.waffles.length;i++ ){
       this.waffles[i].checkMouse(mouseX,mouseY);
-  
     }
+    
+      
+      
 
 
     pop();
