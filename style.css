@@ -23,3 +23,11 @@ body{
 .selected{
     background: rgb(167, 158, 107)
 }
+
+.select2 {
+    position: absolute;
+    top: 100px;
+    left: 400px;
+}
+
+.flag-text { margin-left: 10px; }
