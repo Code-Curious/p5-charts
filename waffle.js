@@ -6,12 +6,8 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
     var boxes_across = boxes_across;
     var boxes_down = boxes_down;
     var name = name;
-
-    // var coloumn = table.getColumn(columnHeading);
     var possibleValues = possibleValues;
-
     var colours = ['#f0f0f0', '#d6caeb'];
-
     var categories = [];
     var boxes = [];
 
@@ -23,10 +19,9 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
                 boxesCount: round(boxes_across * boxes_down * (data[i]/100)),// number of boxes to color
                 colour: colours[i % colours.length]
             })
-            console.log('categories after add :', categories);
+            //console.log('categories after add :', categories);
         }
     }
-
 
     function addBoxes() {
         var currentCategory = 0;
@@ -34,7 +29,6 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
 
         var boxWidth = width / boxes_across;
         var boxheight = height / boxes_down;
-
 
         for (var i = 0; i < boxes_down; i++) {
             boxes.push([]) // we want the boxes to be 2D
@@ -100,22 +94,17 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
     //add categories 
     addCategories();
     addBoxes();
-    // draw waffle chart
     
 }
 
 function Box(x, y, width, height, category) {
-
-
     var x = x;
     var y = y;
     var height = height;
     var width = width;
-
     this.category = category;
 
-
-
+    // hovering over with the mouse
     this.mouseOver = function (mouseX, mouseY) {
         // is the mouse over this box
         if (mouseX > x && mouseX < x + width &&
@@ -127,8 +116,8 @@ function Box(x, y, width, height, category) {
 
     }
 
+    // draw each box
     this.draw = function () {
-
         stroke(255)
         fill(category.colour);
         rect(x, y, width, height);

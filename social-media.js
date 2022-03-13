@@ -84,7 +84,7 @@ function Socialmedia() {
     textAlign('center', 'center');
     textSize(24);
     textStyle(BOLD);
-    text(title,x - 550,y - 650); //650
+    text(title,x - 550,y - 650); 
     
     pop() //to restore last drawing config.
   };

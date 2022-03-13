@@ -70,9 +70,7 @@ function Worldpopulation() {
         year: x["Year"],
         worldPopulation: (parseFloat(x["World Population"].replaceAll(",", "")) / 1000000000).toFixed(2)
       }
-    })
-
-   
+    })   
     textSize(12);
     push();
     translate(10,200);

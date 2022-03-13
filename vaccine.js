@@ -31,15 +31,12 @@ function Vaccine(){
       return;
     }
 
-    this.waffles = [];
-    
+    this.waffles = [];    
     this.select = createSelect();
     this.select.position(400, 80); 
-    
-    console.log('this.data :', this.data);
 
+    //return all rows in the csv file as new array 
     let countriesInFile = this.data.getRows().map( x => x.get(0));
-    
     // countries with their iso codes, used to display the flags
     let isoCountries = [
       { id: 'AF', text: 'Afghanistan'},
@@ -288,7 +285,7 @@ function Vaccine(){
       { id: 'ZM', text: 'Zambia'},
       { id: 'ZW', text: 'Zimbabwe'}
     ];  
-
+    //return a new array with countries in the file with their iso code
     let countriesWithIds = isoCountries.filter(c => countriesInFile.includes(c.text))
 
     function formatCountry (country) {
@@ -300,6 +297,7 @@ function Vaccine(){
       return template;
     };
 
+  //create searching box
     let selectElement = this.select.elt;
     $(selectElement).select2({
       placeholder: "Select a country",
@@ -308,7 +306,7 @@ function Vaccine(){
       data: countriesWithIds
     });
     $(selectElement).on('select2:open', function() {
-        console.log($('.select2-search__field').first());
+        //console.log($('.select2-search__field').first());
         document.querySelector('.select2-search__field').focus();
     });
 
@@ -329,11 +327,10 @@ function Vaccine(){
       let remainingPercentageFromBoosterDose = 100 - boosterDosePercentage;
 
       var waffleNames = ["First dose", "Second dose", "Booster dose"];
-
       var valuesNames = ['Remaining Population', 'Vaccinated'];
 
       let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage], [remainingPercentageFromBoosterDose, boosterDosePercentage]]; 
-      console.log('wafflesData :', wafflesData);
+     // console.log('wafflesData :', wafflesData);
 
       for (var i = 0; i < wafflesData.length; i++) {
         let x = 200 + (i * 220);
