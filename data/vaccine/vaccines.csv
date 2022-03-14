@@ -1,6 +1,5 @@
 ﻿Country,First dose,Second dose,Booster
 Argentina,90%,80%,37%
-Aruba,82%,76%,-
 Australia,87%,81%,44%
 Austria,76%,74%,56%
 Bahrain,75%,73%,58%
@@ -39,7 +38,6 @@ Morocco,68%,64%,14%
 Nepal,75%,60%,3.6%
 Netherlands,78%,71%,52%
 New Zealand,86%,81%,47%
-Nicaragua,82%,58%,-
 Northern Ireland,89%,83%,61%
 Norway,81%,75%,54%
 Panama,75%,60%,27%
@@ -56,10 +54,13 @@ Sweden,76%,74%,47%
 Taiwan,81%,75%,39%
 Thailand,77%,71%,29%
 Turkmenistan,74%,54%,0%
-U.A.E.,99%,97%,48%
-U.K.,79%,73%,57%
+United Arab Emirates,99%,97%,48%
+United Kingdom,79%,73%,57%
 United States,76%,65%,28%
 Uruguay,86%,79%,55%
 Venezuela,78%,50%,1.4%
 Vietnam,82%,80%,38%
 Wales,92%,87%,71%
+Turkey,86%,62%,42%
+Tunisia,60%,53%,5%
+Nigeria,9%,4%,0%

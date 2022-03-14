@@ -31,3 +31,10 @@ body{
 }
 
 .flag-text { margin-left: 10px; }
+.custom-select {
+    position: relative;
+    font-family: Arial;
+    background-color: blue;
+  }
+
+  

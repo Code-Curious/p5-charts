@@ -1,7 +1,7 @@
-const colors = ['#42547d', '#a3544b', '#6da17b', '#702540','#6c8394','#7d6f7b'];   
+const colors = ['#CC6600', '#CCCC00', '#66CC00', '#00CCCC','#6600CC','#CC0066'];   
 const thickness = 40;
-let radius = 150, centerX, centerY;
-let labelSpace = 30;
+let radius = 180, centerX, centerY;
+let labelSpace = 40;
 
 // draw an arrow for a vector at a given base position (to debug mouse pointer hovering)
 function drawArrow(base, vec, myColor) {
@@ -65,6 +65,7 @@ function TechDiversityRace() {
   };
 
   this.destroy = function() {
+
     this.select.remove();
   };
 
@@ -114,7 +115,7 @@ function TechDiversityRace() {
     textAlign('center', 'center');
     textSize(24);
     textStyle(BOLD)
-    text(title, x, y -250);
+    text(title, x, y -300);
     
     segments = {}; //format data for doughnut input
     // execute each element in the data
@@ -163,10 +164,11 @@ function TechDiversityRace() {
         noStroke();
         textSize(40);
         fill(colors[i]);
-        
-        text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
-        pop();
-      } 
+        textAlign(CENTER)
+      // text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
+      text(formatNumber(segments[keys[i]]) + "%", centerX, centerY); 
+      pop();
+    } 
           
 
     //to draw legend Item

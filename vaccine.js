@@ -268,8 +268,8 @@ function Vaccine(){
       { id: 'TV', text: 'Tuvalu'},
       { id: 'UG', text: 'Uganda'},
       { id: 'UA', text: 'Ukraine'},
-      { id: 'AE', text: 'United Arab Emirates'},
       { id: 'GB', text: 'United Kingdom'},
+      { id: 'AE', text: 'United Arab Emirates'},
       { id: 'US', text: 'United States'},
       { id: 'UM', text: 'United States Outlying Islands'},
       { id: 'UY', text: 'Uruguay'},
@@ -314,7 +314,7 @@ function Vaccine(){
     
     // register selection event handler
     $(selectElement).on('select2:select', function(e) {
-      console.log('selected value changed :', e);
+      //console.log('selected value changed :', e);
 
       that.selectedCountry = e.params.data.text;
       that.relevantRow = that.data.getRows().find(element => element.get(0).trim().toLowerCase() == that.selectedCountry.trim().toLowerCase());
@@ -330,7 +330,7 @@ function Vaccine(){
       var valuesNames = ['Remaining Population', 'Vaccinated'];
 
       let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage], [remainingPercentageFromBoosterDose, boosterDosePercentage]]; 
-     // console.log('wafflesData :', wafflesData);
+      //console.log('wafflesData :', wafflesData);
 
       for (var i = 0; i < wafflesData.length; i++) {
         let x = 200 + (i * 220);

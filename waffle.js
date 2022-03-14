@@ -19,7 +19,6 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
                 boxesCount: round(boxes_across * boxes_down * (data[i]/100)),// number of boxes to color
                 colour: colours[i % colours.length]
             })
-            //console.log('categories after add :', categories);
         }
     }
 
