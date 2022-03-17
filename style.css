@@ -17,11 +17,11 @@ body{
 }
 
 .hover {
-    background: rgb(141, 229, 138)
+    background: rgb(213, 219, 0)
 }
 
 .selected{
-    background: rgb(167, 158, 107)
+    background: rgb(187, 246, 0)
 }
 
 .select2 {

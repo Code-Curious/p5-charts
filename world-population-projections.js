@@ -31,17 +31,17 @@ function Worldpopulation() {
     data = this.data.columns;
 
     this.colors = [
-      '#97c3cf', 
-      '#7e9ea6',
-      '#6d8c94',
-      '#678187',
-      '#556b70',
-      '#476066',
-      '#344c52',
-      '#223a40',
-      '#162f36',
-      '#0e252b',
-      '#072026'
+      '#D9ED92', 
+      '#B5E48C',
+      '#99D98C',
+      '#76C893',
+      '#52B69A',
+      '#34A0A4',
+      '#168AAD',
+      '#1A759F',
+      '#1E6091',
+      '#184E77',
+      '#003855'
   ];
     noStroke()
   }
@@ -53,9 +53,9 @@ function Worldpopulation() {
     var y = height / 2;
     
     textSize(24);
-    fill(0);
-    textStyle(BOLD);
-    text(title,x- 200,y- 250); 
+    fill('#355070');
+    textStyle(BOLDITALIC);
+    text(title,x- 200,y- 300); 
     var dataObj = this.data.getObject();
 
     // transform data object into an array

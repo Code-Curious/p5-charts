@@ -2,11 +2,11 @@ function Bubble(_name, size)
 {
     this.size = size;
     this.pos = createVector(0,0,0);
-    this.direction = createVector(0,0);
+    this.direction = createVector(0,0,0);
     this.name = _name;
-    this.color = randomColor({ luminosity: 'light' });
+    this.color = randomColor({ luminosity: 'light'});
 
-//draw the bubble and name
+//draw the bubble and names
 this.draw = function()
 {
     push();
@@ -25,7 +25,7 @@ this.draw = function()
 this.update = function(_bubbles)
 {
 
-    this.direction.set(0,0);
+    this.direction.set(0,0,0);
     
     for(var i = 0; i < _bubbles.length; i++)
     {

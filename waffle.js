@@ -62,7 +62,9 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
         strokeWeight(1);
         fill("#718096");
         textSize(20);
-        text(name, x + 50, y - 20);
+        textStyle(BOLDITALIC);
+        textAlign(LEFT);
+        text(name, x + 20, y - 20);
         pop();
 
     }
@@ -75,11 +77,12 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
                     if (mouseOver != false) {
                         push();
                         fill(0);
-                        textSize(20);
                         var twidth = textWidth(mouseOver);
-                        textAlign(LEFT, TOP);
                         rect(mouseX, mouseY, twidth + 20, 40);
+                        textSize(20);
                         fill(255);
+                        textAlign(LEFT,TOP,CENTER);
+                        textStyle(BOLDITALIC);
                         text(mouseOver, mouseX + 10, mouseY + 10);
                         pop();
                         break;

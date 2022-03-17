@@ -374,9 +374,10 @@ function Vaccine(){
     //draw the title of the chart
     var title = this.title + this.selectedCountry;
     strokeWeight(2)
-    textAlign('center', 'center');
+    textAlign(CENTER, CENTER);
+    fill('#355070');
     textSize(24);
-    textStyle(NORMAL)
+    textStyle(BOLDITALIC);
     text(title, x, y - 300);
 
     if (!this.relevantRow) {

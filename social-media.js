@@ -81,9 +81,10 @@ function Socialmedia() {
     
     //draw the title.
     strokeWeight(2);
-    textAlign('center', 'center');
+    textAlign(CENTER, CENTER);
+    fill('#355070');
     textSize(24);
-    textStyle(BOLD);
+    textStyle(BOLDITALIC);
     text(title,x - 550,y - 650); 
     
     pop() //to restore last drawing config.

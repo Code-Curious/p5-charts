@@ -1,4 +1,5 @@
-const colors = ['#CC6600', '#CCCC00', '#66CC00', '#00CCCC','#6600CC','#CC0066'];   
+// const colors = ['#CC6600', '#CCCC00', '#66CC00', '#00CCCC','#6600CC','#CC0066'];
+const colors = ['#52B69A', '#34A0A4', '#168AAD', '#1A759F','#1E6091','#184E77'];  
 const thickness = 40;
 let radius = 180, centerX, centerY;
 let labelSpace = 40;
@@ -111,10 +112,11 @@ function TechDiversityRace() {
     strokeCap(SQUARE);
     ellipseMode(RADIUS);
 
-    strokeWeight(2)
-    textAlign('center', 'center');
+    strokeWeight(2);
+    textAlign(CENTER, CENTER);
+    fill('#355070');
     textSize(24);
-    textStyle(BOLD)
+    textStyle(BOLDITALIC);
     text(title, x, y -300);
     
     segments = {}; //format data for doughnut input
@@ -161,15 +163,22 @@ function TechDiversityRace() {
       let isCursorAngleOnCurrentSlice = (mouseAngle > currentSliceStartAngle) && (mouseAngle < currentSliceEndAngle);
       if (isCursorDistanceOnDoughnut && isCursorAngleOnCurrentSlice) {
         push()
-        noStroke();
-        textSize(40);
+        stroke(0);
+        strokeWeight(2)
+        textSize(35);
         fill(colors[i]);
-        textAlign(CENTER)
+        textAlign(CENTER,CENTER);
       // text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
       text(formatNumber(segments[keys[i]]) + "%", centerX, centerY); 
+      text(keys[i], centerX,centerY +30);
       pop();
     } 
-          
+  
+    noStroke();
+    fill('#adb5bd');
+    textSize(15);
+    textAlign(CENTER,CENTER);
+    text('hover with mouse on each segment to show percentage', 500,600);
 
     //to draw legend Item
       if(keys){

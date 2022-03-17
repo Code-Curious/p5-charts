@@ -49,8 +49,7 @@ function PieChart(x, y, diameter) {
       }
 
       fill(colour);
-      stroke(0);
-      strokeWeight(1);
+      noStroke();
 
       arc(this.x, this.y,
           this.diameter, this.diameter,
@@ -66,8 +65,9 @@ function PieChart(x, y, diameter) {
 
       if(isCursorDistanceOnChart && isCursorAngleOnCurrentSlice) {
         push()
-        noStroke();
-        textSize(35);
+        stroke(0);
+        strokeWeight(2);
+        textSize(40);
         fill(colour);
         text(data[i] + " %", this.x - 400, this.y - (this.diameter *0.6) + 200 ); 
         pop();
@@ -79,8 +79,11 @@ function PieChart(x, y, diameter) {
     if (title) {
       noStroke();
       textAlign('center', 'center');
+      fill('#355070');
       textSize(24);
-      text(title, this.x, this.y - this.diameter * 0.6);
+      textStyle(BOLDITALIC);
+      // text(title, this.x, this.y - this.diameter * 0.6);
+      text(title, this.x, this.y-300);
     }
     pop();
   };
@@ -92,6 +95,8 @@ function PieChart(x, y, diameter) {
     var boxHeight = this.labelSpace / 2;
 
     fill(colour);
+    stroke(0);
+    strokeWeight(1);
     rect(x, y, boxWidth, boxHeight);
 
     fill('black');
