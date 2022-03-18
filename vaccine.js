@@ -1,10 +1,10 @@
 function Vaccine(){
     // Name for the visualisation to appear in the menu bar.
-  this.name = 'COVID vaccine percentages per country 2022';
+  this.name = 'COVID-19 vaccination percentages by country in 2022';
 
   // Each visualisation must have a unique ID with no special
   // characters.
-  this.id = 'vaccine-percentages-per-country';
+  this.id = 'vaccine-percentages-by-country';
 
   // Property to represent whether data has been loaded.
   this.loaded = false;
