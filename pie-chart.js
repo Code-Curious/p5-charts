@@ -76,18 +76,19 @@ function PieChart(x, y, diameter) {
       lastAngle += angles[i];
     }
 
+  //make the chart title
     if (title) {
       noStroke();
       textAlign('center', 'center');
       fill('#355070');
       textSize(24);
       textStyle(BOLDITALIC);
-      // text(title, this.x, this.y - this.diameter * 0.6);
       text(title, this.x, this.y-300);
     }
     pop();
   };
 
+  //draw each label box
   this.makeLegendItem = function(label, i, colour) {
     var x = this.x + 50 + this.diameter / 2;
     var y = this.y + (this.labelSpace * i) - this.diameter / 3;
@@ -106,7 +107,7 @@ function PieChart(x, y, diameter) {
     text(label, x + boxWidth + 10, y + boxWidth / 2);
   };
   
-  // to handle mouse angle
+  //handle mouse angle
   this.getMouseAngle = function() {
     let angle = 0;
     angle = Math.PI / 2 - Math.atan((320 - mouseX) / (200 - mouseY));

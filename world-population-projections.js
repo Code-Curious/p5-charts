@@ -30,6 +30,7 @@ function Worldpopulation() {
 
     data = this.data.columns;
 
+    //to color each bar
     this.colors = [
       '#D9ED92', 
       '#B5E48C',

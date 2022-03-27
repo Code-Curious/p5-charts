@@ -51,7 +51,6 @@ function TechDiversityGender() {
       console.log('Data not yet loaded');
       return;
     }
-
     // Get the value of the company we're interested in from the
     // select item.
     var company = this.select.value();
@@ -71,13 +70,14 @@ function TechDiversityGender() {
     // Make a title.
     var title = 'Gender diversity at ' + company;
 
-    //text to
+    //text to appear under the chart to inform the user to hover with the mouse
     textStyle(BOLDITALIC);
     noStroke();
     fill('#adb5bd');
     textSize(15);
     textAlign(CENTER,CENTER);
     text('hover with mouse on each segment to show percentage', 500,600);
+
     // Draw the pie chart!
     this.pie.draw(col,labels, colours, title);
 

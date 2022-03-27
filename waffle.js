@@ -59,6 +59,7 @@ function Waffle(x, y, width, height, boxes_across, boxes_down, data, name, possi
             }
         }
 
+        //draw title for each waffle
         strokeWeight(1);
         fill("#718096");
         textSize(20);

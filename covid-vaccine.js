@@ -1,5 +1,5 @@
 function Vaccine(){
-    // Name for the visualisation to appear in the menu bar.
+  // Name for the visualisation to appear in the menu bar.
   this.name = 'COVID-19 vaccination percentages by country in 2022';
 
   // Each visualisation must have a unique ID with no special
@@ -306,7 +306,6 @@ function Vaccine(){
       data: countriesWithIds
     });
     $(selectElement).on('select2:open', function() {
-        //console.log($('.select2-search__field').first());
         document.querySelector('.select2-search__field').focus();
     });
 
@@ -314,7 +313,6 @@ function Vaccine(){
     
     // register selection event handler
     $(selectElement).on('select2:select', function(e) {
-      //console.log('selected value changed :', e);
 
       that.selectedCountry = e.params.data.text;
       that.relevantRow = that.data.getRows().find(element => element.get(0).trim().toLowerCase() == that.selectedCountry.trim().toLowerCase());
@@ -327,10 +325,10 @@ function Vaccine(){
       let remainingPercentageFromBoosterDose = 100 - boosterDosePercentage;
 
       var waffleNames = ["First dose", "Second dose", "Booster dose"];
-      var valuesNames = ['Remaining Population', 'Vaccinated'];
+      var valuesNames = ['Remaining Population', 'Vaccinated Population'];
 
       let wafflesData = [[remainingPercentageFromFirstDose, firstDosePercentage],[remainingPercentageFromSecondDose, secondDosePercentage], [remainingPercentageFromBoosterDose, boosterDosePercentage]]; 
-      //console.log('wafflesData :', wafflesData);
+
 
       for (var i = 0; i < wafflesData.length; i++) {
         let x = 200 + (i * 220);

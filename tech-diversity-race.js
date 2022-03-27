@@ -1,4 +1,3 @@
-// const colors = ['#CC6600', '#CCCC00', '#66CC00', '#00CCCC','#6600CC','#CC0066'];
 const colors = ['#52B69A', '#34A0A4', '#168AAD', '#1A759F','#1E6091','#184E77'];  
 const thickness = 40;
 let radius = 180, centerX, centerY;
@@ -133,8 +132,7 @@ function TechDiversityRace() {
     let mouseDist = dist(centerX, centerY, mouseX, mouseY);
     let centerVector = createVector(centerX, centerY);
     let fromCenterToMousePointerVector = createVector(mouseX - centerX, mouseY - centerY);
-    let rightAxisVector = createVector(centerX - radius, 289 - centerY); // DONT KNOW WHERE THIS 289 COMES FROM HONESTLY  ¯\_(ツ)_/¯
-
+    let rightAxisVector = createVector(centerX - radius, 289 - centerY); 
     // the currentSliceEndAngle between a vector pointing to the right, and the vector
     // pointing from the center of the window to the current mouse position.
     let mouseAngle = rightAxisVector.angleBetween(fromCenterToMousePointerVector);
@@ -162,18 +160,19 @@ function TechDiversityRace() {
       let isCursorDistanceOnDoughnut =  (mouseDist > radius - thickness) && (mouseDist < radius + thickness);
       let isCursorAngleOnCurrentSlice = (mouseAngle > currentSliceStartAngle) && (mouseAngle < currentSliceEndAngle);
       if (isCursorDistanceOnDoughnut && isCursorAngleOnCurrentSlice) {
-        push()
-        stroke(0);
-        strokeWeight(2)
-        textSize(35);
-        fill(colors[i]);
-        textAlign(CENTER,CENTER);
-      // text(formatNumber(segments[keys[i]]) + "%", centerX + radius -200 , centerY +radius -150); 
+      push()
+      stroke(0);
+      strokeWeight(2)
+      textSize(35);
+      fill(colors[i]);
+      textAlign(CENTER,CENTER);
       text(formatNumber(segments[keys[i]]) + "%", centerX, centerY); 
       text(keys[i], centerX,centerY +30);
       pop();
     } 
+
   
+     //text to appear under the chart to inform the user to hover with the mouse
     noStroke();
     fill('#adb5bd');
     textSize(15);

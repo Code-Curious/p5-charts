@@ -1,4 +1,3 @@
-
 // Global variable to store the gallery object. The gallery object is
 // a container for all the visualisations.
 var gallery;
@@ -16,17 +15,15 @@ function setup() {
   gallery.addVisual(new TechDiversityRace());
   gallery.addVisual(new TechDiversityGender());
   gallery.addVisual(new PayGapTimeSeries());
-  gallery.addVisual(new PayGapByJob2017());
   gallery.addVisual(new Worldpopulation());
   gallery.addVisual(new Socialmedia());
   gallery.addVisual(new Vaccine());
-  //gallery.addVisual(new InrnetUsers());
 
 }
 
 function draw() {
   background(255);
-  frameRate(60);
+  frameRate(60); //60 frames to be displayed every second.
   if (gallery.selectedVisual != null) {
     gallery.selectedVisual.draw();
   }

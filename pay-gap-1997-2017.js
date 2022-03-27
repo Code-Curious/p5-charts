@@ -14,7 +14,7 @@ function PayGapTimeSeries() {
   this.xAxisLabel = 'year';
   this.yAxisLabel = '%';
 
-  var marginSize = 35;
+  var marginSize = 95;
 
   // Layout object to store all common plot layout parameters and
   // methods.
